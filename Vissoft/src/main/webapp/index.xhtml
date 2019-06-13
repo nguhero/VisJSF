@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <title>Infomation Employee</title>
+</h:head>
+<h:body>
+   <h1><h:outputText value="List Employee"></h:outputText> </h1>
+   <p:commandButton value="Search" action="#{empController.search()}"></p:commandButton>
+   <h:form>
+   <h:dataTable var="emp" value="#{empController.emps}" border="1" >
+      <h:column><f:facet name="header">STT</f:facet>
+         <h:outputText value="#{empController.emps.indexOf(emp)+1}"></h:outputText>
+      </h:column>
+      <h:column><f:facet name="header">Thao tác</f:facet>
+         <h:commandButton image="img/rubbish-bin-delete-button.png" onclick=" return confirm('Có chắc chắn xóa không!')" action="#{empController.delete(emp)}">
+            <h:commandButton image="img/edit.png" action="#{empController.edit(emp)}"></h:commandButton>
+         </h:commandButton>
+      </h:column>
+      <h:column ><f:facet name="header">Mã nhân viên</f:facet>
+          <h:outputText value="#{emp.empno}"></h:outputText>
+       </h:column>
+      <h:column><f:facet name="header">Tên nhân viên</f:facet>
+      <h:outputText value="#{emp.ename}"></h:outputText>
+      </h:column>
+      <h:column><f:facet name="header">Phòng ban</f:facet>
+      <h:outputText value="#{emp.dep}"></h:outputText>
+      </h:column>
+      <h:column><f:facet name="header">Người quản lý</f:facet>
+      <h:outputText value="#{emp.mgr}"></h:outputText>
+      </h:column>
+      <h:column><f:facet name="header">Ngày bắt đầu</f:facet>
+      <h:outputText value="#{emp.hiredate['toGMTString']()}"></h:outputText>
+      </h:column>
+      <h:column><f:facet name="header">Công việc được giao</f:facet>
+      <h:outputText value="#{emp.job}"></h:outputText>
+      </h:column>
+      <h:column><f:facet name="header">Lương tháng</f:facet>
+      <h:outputText value="#{emp.sal}"></h:outputText> </h:column>
+
+   </h:dataTable>
+   </h:form>
+</h:body>
+</html>

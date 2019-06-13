@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head><title>Search</title>
+<f:event listener="#{empController.initEmpSearch()}" type="preRenderView"></f:event>
+<f:event listener="#{empController.initDepAndMgr()}" type="preRenderView"></f:event></h:head>
+<h:body>
+    <h:form>
+        <p:panel header="Tìm kiếm">
+    <table style="margin: auto" cellspacing="12px">
+        <tr>
+            <td><p:outputLabel>Mã nhân viên</p:outputLabel></td>
+            <td><p:inputText value="#{empController.empSearch.empno}"></p:inputText></td>
+            <td><p:outputLabel>Tên nhân viên</p:outputLabel></td>
+            <td><p:inputText value="#{empController.empSearch.ename}"></p:inputText></td>
+        </tr>
+        <tr>
+            <td><p:outputLabel for="phongban" value="Phòng ban"></p:outputLabel></td>
+            <td><p:selectOneMenu id="phongban" value="#{empController.empSearch.dep}">
+                <f:selectItem itemLabel="Chọn phòng ban" itemValue="" noSelectionOption="true"></f:selectItem>
+                <f:selectItems value="#{empController.listDep}"></f:selectItems>
+            </p:selectOneMenu></td>
+            <td><p:outputLabel>Người quản lý</p:outputLabel></td>
+            <td><p:selectOneMenu value="#{empController.empSearch.mgr}">
+                <f:selectItem itemLabel="Chọn người quản lý" itemValue="" noSelectionOption="true"></f:selectItem>
+                <f:selectItems value="#{empController.listMgr}"></f:selectItems>
+            </p:selectOneMenu> </td>
+        </tr>
+        <tr>
+            <td><p:outputLabel>Mức lương từ</p:outputLabel></td>
+            <td><p:inputText value="#{empController.empSearch.salMin}"></p:inputText></td>
+            <td><p:outputLabel>Đến</p:outputLabel></td>
+            <td><p:inputText value="#{empController.empSearch.salMax}"></p:inputText></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right"><p:commandButton value="Tìm kiếm" action="#{empController.find()}"></p:commandButton></td>
+            <td colspan="2"><p:commandButton value="Thêm mới" action="#{empController.add()}"></p:commandButton></td>
+         </tr>
+    </table>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+<f:event listener="#{empController.initEmp()}" type="preRenderView">
+    <f:event listener="#{empController.initDepAndMgr()}"  type="preRenderView"></f:event>
+</f:event>
+</h:head>
+<h:body>
+    <h:form>
+        <p:panel id="panel" header="Thêm mới">
+            <p:messages id="msms"></p:messages>
+        <table style="margin: auto" cellspacing="12px" >
+            <tr>
+                <td ><p:outputLabel>Mã nhân viên</p:outputLabel></td>
+                <td><p:inputText id="manv" required="true" value="#{empController.emp.empno}" label="Mã nhân viên"></p:inputText></td>
+                <td><p:outputLabel>Tên nhân viên</p:outputLabel></td>
+                <td><p:inputText value="#{empController.emp.ename}" required="true" label="Tên nhân viên"></p:inputText></td>
+            </tr>
+            <tr>
+                <td><p:outputLabel>Phòng ban</p:outputLabel></td>
+                <td><p:selectOneMenu value="#{empController.emp.dep}" required="true" label="Phòng ban">
+                    <f:selectItem itemLabel="Chọn phòng ban" itemValue="" noSelectionOption="true"></f:selectItem>
+                    <f:selectItems value="#{empController.listDep}"></f:selectItems>
+                </p:selectOneMenu>
+                </td>
+                <td><p:outputLabel>Người quản lý</p:outputLabel></td>
+                <td><p:selectOneMenu value="#{empController.emp.mgr}" >
+                    <f:selectItem itemLabel="Chọn người quản lý" itemValue="" noSelectionOption="true"></f:selectItem>
+                    <f:selectItems value="#{empController.listMgr}"></f:selectItems>
+                </p:selectOneMenu> </td>
+            </tr>
+            <tr>
+                <td><p:outputLabel>Mức lương </p:outputLabel></td>
+                <td><p:inputNumber value="#{empController.emp.sal}" required="true"  minValue="0" maxValue="1000000000000" label="Mức lương"></p:inputNumber> </td>
+                <td><p:outputLabel>Công việc</p:outputLabel></td>
+                <td><p:inputText value="#{empController.emp.job}"></p:inputText></td>
+            </tr>
+            <tr>
+                <td><p:outputLabel>Ngày bắt đầu</p:outputLabel></td>
+                <td><p:calendar id="button" value="#{empController.emp.hiredate}" pattern="MM/dd/yyyy" showOn="button"></p:calendar></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right"><p:commandButton  value="Lưu" action="#{empController.save()}" update="panel"></p:commandButton> </td>
+                <td colspan="2"><p:commandButton value="Hủy" action="#{empController.cancel()}" update="panel"></p:commandButton> </td>
+            </tr>
+        </table>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
